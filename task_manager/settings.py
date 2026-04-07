@@ -25,8 +25,6 @@ load_dotenv(BASE_DIR / '.env')
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-#SECRET_KEY = 'django-insecure-5t*n3yew4%b2t!6m+x%__v#x28ch83osiy3akydo9x1s^5lwx8'
-# убрать
 
 SECRET_KEY = os.getenv('SECRET_KEY', 'dev-secret-key')
 
