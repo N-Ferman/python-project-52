@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Создать статус{% endblock %}
+
+{% block content %}
+<h1 class="my-4">Создать статус</h1>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" class="btn btn-primary">Создать</button>
+</form>
+{% endblock %}
