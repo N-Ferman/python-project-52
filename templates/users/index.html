@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Пользователи{% endblock %}
+
+{% block content %}
+<h1 class="my-4">Пользователи</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Имя пользователя</th>
+      <th>Полное имя</th>
+      <th>Дата создания</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in users %}
+      <tr>
+        <td>{{ item.id }}</td>
+        <td>{{ item.username }}</td>
+        <td>{{ item.get_full_name }}</td>
+        <td>{{ item.date_joined|date:"d.m.Y H:i" }}</td>
+        <td>
+          <a href="{% url 'user_update' item.pk %}">Изменить</a>
+          <br>
+          <a href="{% url 'user_delete' item.pk %}">Удалить</a>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
