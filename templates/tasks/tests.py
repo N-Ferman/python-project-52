@@ -89,3 +89,70 @@ class TaskCRUDTest(TestCase):
         response = self.client.post(reverse('task_delete', args=[self.task.pk]))
         self.assertRedirects(response, reverse('tasks'))
         self.assertTrue(Task.objects.filter(pk=self.task.pk).exists())
+
+class TaskFilterTest(TestCase):
+    def setUp(self):
+        self.author = User.objects.create_user(
+            username='author',
+            password='strong-pass-123',
+        )
+        self.executor1 = User.objects.create_user(
+            username='executor1',
+            password='strong-pass-123',
+        )
+        self.executor2 = User.objects.create_user(
+            username='executor2',
+            password='strong-pass-123',
+        )
+
+        self.status_new = Status.objects.create(name='Новый')
+        self.status_done = Status.objects.create(name='Завершен')
+
+        self.label_bug = Label.objects.create(name='bug')
+        self.label_feature = Label.objects.create(name='feature')
+
+        self.task1 = Task.objects.create(
+            name='Task 1',
+            description='Desc 1',
+            status=self.status_new,
+            author=self.author,
+            executor=self.executor1,
+        )
+        self.task1.labels.add(self.label_bug)
+
+        self.task2 = Task.objects.create(
+            name='Task 2',
+            description='Desc 2',
+            status=self.status_done,
+            author=self.executor2,
+            executor=self.executor2,
+        )
+        self.task2.labels.add(self.label_feature)   
+    def test_filter_by_status(self):
+        self.client.force_login(self.author)
+        response = self.client.get(reverse('tasks'), {
+            'status': self.status_new.pk,
+        })
+        self.assertContains(response, 'Task 1')
+        self.assertNotContains(response, 'Task 2')
+    def test_filter_by_executor(self):
+        self.client.force_login(self.author)
+        response = self.client.get(reverse('tasks'), {
+            'executor': self.executor1.pk,
+        })
+        self.assertContains(response, 'Task 1')
+        self.assertNotContains(response, 'Task 2')
+    def test_filter_by_label(self):
+        self.client.force_login(self.author)
+        response = self.client.get(reverse('tasks'), {
+            'labels': [self.label_bug.pk],
+        })
+        self.assertContains(response, 'Task 1')
+        self.assertNotContains(response, 'Task 2')
+    def test_filter_only_self_tasks(self):
+        self.client.force_login(self.author)
+        response = self.client.get(reverse('tasks'), {
+            'self_tasks': 'on',
+        })
+        self.assertContains(response, 'Task 1')
+        self.assertNotContains(response, 'Task 2')
