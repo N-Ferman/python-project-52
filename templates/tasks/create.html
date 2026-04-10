@@ -1,16 +1,42 @@
-
 {% extends "base.html" %}
+{% load django_bootstrap5 %}
 
 {% block title %}Создать задачу{% endblock %}
 
 {% block content %}
-<h1 class="my-4">Создать задачу</h1>
+<div class="container-lg">
+  <h1 class="my-4">Создать задачу</h1>
 
-{% load django_bootstrap5 %}
+  <div class="card shadow-sm">
+    <div class="card-body p-4">
+      <form method="post">
+        {% csrf_token %}
 
-<form method="post">
-  {% csrf_token %}
-  {% load django_bootstrap5 %}
-  <button type="submit" class="btn btn-primary">Создать</button>
-</form>
+        <div class="row">
+          <div class="col-12">
+            {% bootstrap_field form.name %}
+          </div>
+
+          <div class="col-12">
+            {% bootstrap_field form.description %}
+          </div>
+
+          <div class="col-md-6">
+            {% bootstrap_field form.status %}
+          </div>
+
+          <div class="col-md-6">
+            {% bootstrap_field form.executor %}
+          </div>
+
+          <div class="col-12">
+            {% bootstrap_field form.labels %}
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Создать</button>
+      </form>
+    </div>
+  </div>
+</div>
 {% endblock %}
