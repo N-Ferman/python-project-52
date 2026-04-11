@@ -25,3 +25,6 @@ test-coverage:
 
 check:
 	uv run python manage.py check
+
+lint:
+	uv run ruff check .
