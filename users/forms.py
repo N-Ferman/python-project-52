@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-
+from django.contrib.auth.forms import AuthenticationForm
 
 class UserRegisterForm(UserCreationForm):
     first_name = forms.CharField(label='Имя', max_length=150, required=False)
@@ -31,3 +31,9 @@ class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'username')
+
+class UserLoginForm(AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].label = 'Имя пользователя'
+        self.fields['password'].label = 'Пароль'
