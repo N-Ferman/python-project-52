@@ -18,7 +18,7 @@ from django.contrib import admin
 from task_manager.views import index
 from django.views.generic import TemplateView
 from django.urls import include, path
-
+from . import views
 
 from users.views import UserLoginView, UserLogoutView
 
@@ -31,4 +31,5 @@ urlpatterns = [
     path('statuses/', include('statuses.urls')),
     path('tasks/', include('tasks.urls')),
     path('labels/', include('task_labels_app.urls')),
+    path('test-error/', views.test_error, name='test_error'),
 ]
