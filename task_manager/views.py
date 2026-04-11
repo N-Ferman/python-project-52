@@ -1,9 +1,6 @@
 from django.http import HttpResponse
 
 
-def index(request):
-    return HttpResponse('Hello, Hexlet!')
-
 def test_error(request):
     """Trigger a test error for Rollbar."""
     a = None
