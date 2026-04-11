@@ -13,6 +13,14 @@ class UserRegisterForm(UserCreationForm):
         labels = {
             'username': 'Имя пользователя',
         }
+    
+    def __init__(self, *args, **kwargs):
+    super().__init__(*args, **kwargs)
+    self.fields['first_name'].label = 'Имя'
+    self.fields['last_name'].label = 'Фамилия'
+    self.fields['username'].label = 'Имя пользователя'
+    self.fields['password1'].label = 'Пароль'
+    self.fields['password2'].label = 'Подтверждение пароля'
 
 
 class UserUpdateForm(forms.ModelForm):
