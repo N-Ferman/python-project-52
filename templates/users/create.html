@@ -1,12 +1,14 @@
 {% extends "base.html" %}
+{% load django_bootstrap5 %}
 
 {% block title %}Регистрация{% endblock %}
 
 {% block content %}
 <h1 class="my-4">Регистрация</h1>
+
 <form method="post">
   {% csrf_token %}
-  {{ form.as_p }}
+  {% bootstrap_form form layout='vertical' %}
   <button type="submit" class="btn btn-primary">Зарегистрировать</button>
 </form>
 {% endblock %}
