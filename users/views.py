@@ -6,8 +6,8 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.shortcuts import redirect
+from .forms import UserRegisterForm, UserUpdateForm, UserLoginForm
 
-from .forms import UserRegisterForm, UserUpdateForm
 # Create your views here.
 
 class UserListView(ListView):
@@ -54,6 +54,7 @@ class UserDeleteView(UserPermissionMixin, DeleteView):
     
 class UserLoginView(LoginView):
     template_name = 'registration/login.html'
+    form_class = UserLoginForm
 
     def form_valid(self, form):
         messages.success(self.request, 'Вы залогинены')
