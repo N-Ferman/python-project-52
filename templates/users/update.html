@@ -6,7 +6,7 @@
 <h1 class="my-4">Изменение пользователя</h1>
 <form method="post">
   {% csrf_token %}
-  {{ form.as_p }}
+  {% bootstrap_form form layout='vertical' %}
   <button type="submit" class="btn btn-primary">Изменить</button>
 </form>
 {% endblock %}
