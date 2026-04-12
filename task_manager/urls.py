@@ -14,8 +14,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
-from task_manager.views import index
 from django.views.generic import TemplateView
 from django.urls import include, path
 from . import views
@@ -23,13 +23,13 @@ from . import views
 from users.views import UserLoginView, UserLogoutView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', TemplateView.as_view(template_name='index.html'), name='home'),
-    path('users/', include('users.urls')),
-    path('login/', UserLoginView.as_view(), name='login'),
-    path('logout/', UserLogoutView.as_view(), name='logout'),
-    path('statuses/', include('statuses.urls')),
-    path('tasks/', include('tasks.urls')),
-    path('labels/', include('task_labels_app.urls')),
-    path('test-error/', views.test_error, name='test_error'),
+    path("admin/", admin.site.urls),
+    path("", TemplateView.as_view(template_name="index.html"), name="home"),
+    path("users/", include("users.urls")),
+    path("login/", UserLoginView.as_view(), name="login"),
+    path("logout/", UserLogoutView.as_view(), name="logout"),
+    path("statuses/", include("statuses.urls")),
+    path("tasks/", include("tasks.urls")),
+    path("labels/", include("task_labels_app.urls")),
+    path("test-error/", views.test_error, name="test_error"),
 ]

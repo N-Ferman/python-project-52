@@ -10,27 +10,27 @@ from .models import Task
 class TaskFilter(django_filters.FilterSet):
     status = django_filters.ModelChoiceFilter(
         queryset=Status.objects.all(),
-        label='Статус',
+        label="Статус",
     )
     executor = django_filters.ModelChoiceFilter(
         queryset=User.objects.all(),
-        label='Исполнитель',
+        label="Исполнитель",
     )
     labels = django_filters.ModelMultipleChoiceFilter(
-        field_name='labels',
+        field_name="labels",
         queryset=Label.objects.all(),
-        label='Метка',
+        label="Метка",
         widget=forms.SelectMultiple(),
     )
     self_tasks = django_filters.BooleanFilter(
-        method='filter_self_tasks',
-        label='Только свои задачи',
+        method="filter_self_tasks",
+        label="Только свои задачи",
         widget=forms.CheckboxInput(),
     )
 
     class Meta:
         model = Task
-        fields = ['status', 'executor', 'labels']
+        fields = ["status", "executor", "labels"]
 
     def filter_self_tasks(self, queryset, name, value):
         if value:

@@ -5,7 +5,7 @@ class Label(models.Model):
     name = models.CharField(
         max_length=150,
         unique=True,
-        verbose_name='Имя',
+        verbose_name="Имя",
     )
     created_at = models.DateTimeField(auto_now_add=True)
 

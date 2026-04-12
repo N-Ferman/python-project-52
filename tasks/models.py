@@ -9,37 +9,37 @@ class Task(models.Model):
     name = models.CharField(
         max_length=150,
         unique=True,
-        verbose_name='Имя',
+        verbose_name="Имя",
     )
     description = models.TextField(
         blank=True,
-        verbose_name='Описание',
+        verbose_name="Описание",
     )
     status = models.ForeignKey(
         Status,
         on_delete=models.PROTECT,
-        related_name='tasks',
-        verbose_name='Статус',
+        related_name="tasks",
+        verbose_name="Статус",
     )
     author = models.ForeignKey(
         User,
         on_delete=models.PROTECT,
-        related_name='authored_tasks',
-        verbose_name='Автор',
+        related_name="authored_tasks",
+        verbose_name="Автор",
     )
     executor = models.ForeignKey(
         User,
         on_delete=models.PROTECT,
-        related_name='executed_tasks',
-        verbose_name='Исполнитель',
+        related_name="executed_tasks",
+        verbose_name="Исполнитель",
         blank=True,
         null=True,
     )
     labels = models.ManyToManyField(
         Label,
-        related_name='tasks',
+        related_name="tasks",
         blank=True,
-        verbose_name='Метки',
+        verbose_name="Метки",
     )
     created_at = models.DateTimeField(auto_now_add=True)
 
