@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('statuses', '0001_initial'),
-        ('task_labels_app', '0001_initial'),
+        ('labels', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('author', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='authored_tasks', to=settings.AUTH_USER_MODEL, verbose_name='Автор')),
                 ('executor', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='executed_tasks', to=settings.AUTH_USER_MODEL, verbose_name='Исполнитель')),
-                ('labels', models.ManyToManyField(blank=True, related_name='tasks', to='task_labels_app.label', verbose_name='Метки')),
+                ('labels', models.ManyToManyField(blank=True, related_name='tasks', to='labels.label', verbose_name='Метки')),
                 ('status', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='tasks', to='statuses.status', verbose_name='Статус')),
             ],
         ),

@@ -3,7 +3,7 @@ from django import forms
 from django.contrib.auth.models import User
 
 from statuses.models import Status
-from task_labels_app.models import Label
+from labels.models import Label
 from .models import Task
 
 

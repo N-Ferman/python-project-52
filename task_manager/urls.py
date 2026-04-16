@@ -30,6 +30,6 @@ urlpatterns = [
     path("logout/", UserLogoutView.as_view(), name="logout"),
     path("statuses/", include("statuses.urls")),
     path("tasks/", include("tasks.urls")),
-    path("labels/", include("task_labels_app.urls")),
+    path("labels/", include("labels.urls")),
     path("test-error/", views.test_error, name="test_error"),
 ]

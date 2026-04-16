@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     'users',
     'statuses',
     'tasks',
-    'task_labels_app',
+    'labels',
     'django_filters',
 ]
 

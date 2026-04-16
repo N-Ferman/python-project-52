@@ -2,7 +2,7 @@ import django_filters
 from django import forms
 
 from statuses.models import Status
-from task_labels_app.models import Label
+from labels.models import Label
 from .models import Task
 
 
